@@ -1,8 +1,47 @@
+import axios from "axios";
+
+/*
+    "avatar_url": "https://avatars3.githubusercontent.com/u/55510668?v=4",
+    "bio": null,
+    "blog": "",
+    "company": null,
+    "created_at": "2019-09-18T19:18:40Z",
+    "email": null,
+    "events_url": "https://api.github.com/users/bikesh-maharjan/events{/privacy}",
+    "followers": 3,
+    "followers_url": "https://api.github.com/users/bikesh-maharjan/followers",
+    "following": 4,
+    "following_url": "https://api.github.com/users/bikesh-maharjan/following{/other_user}",
+    "gists_url": "https://api.github.com/users/bikesh-maharjan/gists{/gist_id}",
+    "gravatar_id": "",
+    "hireable": null,
+    "html_url": "https://github.com/bikesh-maharjan",
+    "id": 55510668,
+    "location": null,
+    "login": "bikesh-maharjan",
+    "name": "Bikesh Maharjan",
+    "node_id": "MDQ6VXNlcjU1NTEwNjY4",
+    "organizations_url": "https://api.github.com/users/bikesh-maharjan/orgs",
+    "public_gists": 0,
+    "public_repos": 20,
+    "received_events_url": "https://api.github.com/users/bikesh-maharjan/received_events",
+    "repos_url": "https://api.github.com/users/bikesh-maharjan/repos",
+    "site_admin": false,
+    "starred_url": "https://api.github.com/users/bikesh-maharjan/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/bikesh-maharjan/subscriptions",
+    "twitter_username": null,
+    "type": "User",
+    "updated_at": "2020-07-09T19:20:25Z",
+    "url": "https://api.github.com/users/bikesh-maharjan"
+
+*/
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
-    https://api.github.com/users/<your name>
+    https://api.github.com/users/bikesh-maharjan
 */
+console.log(axios);
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -27,6 +66,7 @@
     Using that array, iterate over it, requesting data for each user, creating a new card for each
     user, and adding that card to the DOM.
 */
+const users = []
 
 const followersArray = [];
 
