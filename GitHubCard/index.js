@@ -114,9 +114,11 @@ function createGitUser(obj) {
 
   userImg.setAttribute("src", obj.avatar_url);
   name.textContent = obj.name;
+  userName.textContent = obj.login;
   location.textContent = `Location: ${obj.location}`;
-  profile.textContent = "Profile:";
-  profileLink.setAttribute('href', obj.html_url);
+  profile.textContent = "Profile: ";
+  profileLink.href = obj.html_url;
+  profileLink.textContent = obj.html_url;
   followers.textContent = `Follwers: ${obj.followers}`;
   following.textContent = `Following: ${obj.following}`;
   bio.textContent = `Bio: ${obj.bio}`;
@@ -137,31 +139,40 @@ function createGitUser(obj) {
   return card;
 }
 const gitHub = "https://api.github.com/users/bikesh-maharjan";
-axios.get(gitHub).then(function (response) {
-  const gitData = response.data;
-  userCard.appendChild(createGitUser(gitData));
-})
-.catch(function(error){
-  console.log('we have an issue',error)
-})
-
-// step 5 : creating array 
-
-const followersArr = ['avawing', 'jdulay91', 'andre-jeon','tetondan', 'luishr']
-
-followersArr.forEach(function(users){
-  axios.get(`https://api.github.com/users/${users}`)
-  .then (function(response){
+axios
+  .get(gitHub)
+  .then(function (response) {
     const gitData = response.data;
-    userCard.appendChild(createGitUser(gitData))
+    userCard.appendChild(createGitUser(gitData));
   })
-  .catch(function(error){
-    console.log('Here is an errro', error)
-  })
-})
+  .catch(function (error) {
+    console.log("we have an issue", error);
+  });
 
+// step 5 : creating array
 
+const followersArr = [
+  "avawing",
+  "jdulay91",
+  "andre-jeon",
+  "tetondan",
+  "luishr",
+  'jtwray',
+  "yvette-luong",
+];
 
+followersArr.forEach(function (users) {
+  const gitDataUser = `https://api.github.com/users/${users}`;
+  axios
+    .get(gitDataUser)
+    .then(function (response) {
+      const gitData = response.data;
+      userCard.appendChild(createGitUser(gitData));
+    })
+    .catch(function (error) {
+      console.log("Here is an errro", error);
+    });
+});
 
 /*
   List of LS Instructors Github username's:
