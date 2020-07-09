@@ -41,6 +41,7 @@ import axios from "axios";
     (replacing the placeholder with your Github name):
     https://api.github.com/users/bikesh-maharjan
 */
+
 console.log(axios);
 
 /*
@@ -66,15 +67,12 @@ console.log(axios);
     Using that array, iterate over it, requesting data for each user, creating a new card for each
     user, and adding that card to the DOM.
 */
-const users = []
-
-const followersArray = [];
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
     Using DOM methods and properties, create and return the following markup:
 
-    <div class="card">
+    <div class="cards">
       <img src={image url of user} />
       <div class="card-info">
         <h3 class="name">{users name}</h3>
@@ -90,11 +88,86 @@ const followersArray = [];
     </div>
 */
 
+const userCard = document.querySelector(".cards");
+function createGitUser(obj) {
+  // creating DOM Elements
+  const card = document.createElement("div");
+  const userImg = document.createElement("img");
+  const cardInfo = document.createElement("div");
+  const name = document.createElement("h3");
+  const userName = document.createElement("p");
+  const location = document.createElement("p");
+  const profile = document.createElement("p");
+  const profileLink = document.createElement("a");
+  const followers = document.createElement("p");
+  const following = document.createElement("p");
+  const bio = document.createElement("p");
+
+  // Set Classes
+
+  card.classList = "card";
+  cardInfo.classList = "card-info";
+  name.classList = "name";
+  userName.classList = "username";
+
+  // Set Contents and Text
+
+  userImg.setAttribute("src", obj.avatar_url);
+  name.textContent = obj.name;
+  location.textContent = `Location: ${obj.location}`;
+  profile.textContent = "Profile:";
+  profileLink.setAttribute('href', obj.html_url);
+  followers.textContent = `Follwers: ${obj.followers}`;
+  following.textContent = `Following: ${obj.following}`;
+  bio.textContent = `Bio: ${obj.bio}`;
+
+  //creating Structure of the page
+
+  card.appendChild(userImg);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(userName);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  profile.appendChild(profileLink);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+
+  return card;
+}
+const gitHub = "https://api.github.com/users/bikesh-maharjan";
+axios.get(gitHub).then(function (response) {
+  const gitData = response.data;
+  userCard.appendChild(createGitUser(gitData));
+})
+.catch(function(error){
+  console.log('we have an issue',error)
+})
+
+// step 5 : creating array 
+
+const followersArr = ['avawing', 'jdulay91', 'andre-jeon','tetondan', 'luishr']
+
+followersArr.forEach(function(users){
+  axios.get(`https://api.github.com/users/${users}`)
+  .then (function(response){
+    const gitData = response.data;
+    userCard.appendChild(createGitUser(gitData))
+  })
+  .catch(function(error){
+    console.log('Here is an errro', error)
+  })
+})
+
+
+
+
 /*
   List of LS Instructors Github username's:
     tetondan
     dustinmyers
     justsml
-    luishrd
+    luishr
     bigknell
 */
